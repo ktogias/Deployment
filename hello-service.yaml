@@ -13,7 +13,7 @@ spec:
       labels:
         bb: web
         app: hello-world
-        run: world-service
+        run: hello-service
     spec:
       containers:
       - name: helloservice
@@ -30,7 +30,7 @@ metadata:
   namespace: helloworld
 spec:
   selector:
-    run: world-service
+    run: hello-service
   ports:
   - name: http 
     port: 80
