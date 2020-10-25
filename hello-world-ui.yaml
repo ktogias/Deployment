@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: helloworldui
-        image: cloud.canister.io:5000/ktogias/helloworld:helloworldui-0.1.0
+        image: cloud.canister.io:5000/ktogias/helloworld:helloworldui-0.1.1
       imagePullSecrets:
       - name: registry-canisterio
       
