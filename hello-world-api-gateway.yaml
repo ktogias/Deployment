@@ -20,6 +20,6 @@ spec:
       - name: registry-canisterio
       env:
       - name: HELLO_SERVICE_URL
-        value: hello-service.default.svc.cluster.local
+        value: hello-service.helloworld.svc.cluster.local
       - name: WORLD_SERVICE_URL
-        value: world-service.default.svc.cluster.local
+        value: world-service.helloworld.svc.cluster.local

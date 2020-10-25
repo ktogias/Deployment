@@ -21,6 +21,7 @@ spec:
       imagePullSecrets:
       - name: registry-canisterio
 
+---
 
 apiVersion: v1
 kind: Service
