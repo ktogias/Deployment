@@ -30,7 +30,7 @@ metadata:
 spec:
   selector:
     app: hello-world
-    run: hello-world-ui
+    run: ui
   ports:
   - name: http 
     port: 80
