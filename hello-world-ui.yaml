@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: helloworld-ui
-  namespace: helloworld
 spec:
   replicas: 1
   selector:
@@ -12,9 +11,27 @@ spec:
     metadata:
       labels:
         bb: web
+        app: hello-world
+        run: ui
     spec:
       containers:
       - name: helloworldui
         image: cloud.canister.io:5000/ktogias/helloworld:helloworldui-0.1.0
       imagePullSecrets:
       - name: registry-canisterio
+      
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-gateway
+spec:
+  selector:
+    app: hello-world
+    run: hello-world-ui
+  ports:
+  - name: http 
+    port: 80
+    targetPort: 80
