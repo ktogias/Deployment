@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: world-service
+  namespace: helloworld
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      bb: web
+  template:
+    metadata:
+      labels:
+        bb: web
+        app: hello-world
+        run: world-service
+    spec:
+      containers:
+      - name: worldservice
+        image: cloud.canister.io:5000/ktogias/helloworld:world-0.1.0
+      imagePullSecrets:
+      - name: registry-canisterio
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: world-service
+  namespace: helloworld
+spec:
+  selector:
+    run: world-service
+  ports:
+  - name: http 
+    port: 80
+    targetPort: 80

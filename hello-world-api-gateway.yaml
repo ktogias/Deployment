@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helloworld-api-gateway
+  namespace: helloworld
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      bb: web
+  template:
+    metadata:
+      labels:
+        bb: web
+    spec:
+      containers:
+      - name: apigateway
+        image: cloud.canister.io:5000/ktogias/helloworld:helloworldapigateway-0.1.1
+      imagePullSecrets:
+      - name: registry-canisterio
+      env:
+      - name: HELLO_SERVICE_URL
+        value: hello-service.default.svc.cluster.local
+      - name: WORLD_SERVICE_URL
+        value: world-service.default.svc.cluster.local
