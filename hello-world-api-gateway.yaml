@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: apigateway
-        image: cloud.canister.io:5000/ktogias/helloworld:helloworldapigateway-0.1.1
+        image: cloud.canister.io:5000/ktogias/helloworld:helloworldapigateway-0.1.3
         env:
         - name: HELLO_SERVICE_URL
           value: hello-service.helloworld.svc.cluster.local
