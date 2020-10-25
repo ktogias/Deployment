@@ -1,0 +1,62 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: hw-ms-ktogias-gr-credential-staging
+  namespace: istio-system
+  labels:
+    use-http01-solver: "true"
+  annotations:
+          #  cert-manager.io/issue-temporary-certificate: "true"
+          acme.cert-manager.io/http01-edit-in-place: "true"
+spec:
+  dnsNames:
+    - hw.ms.ktogias.gr
+  secretName: hw-ms-ktogias-gr-credential-staging
+  issuerRef:
+    name: letsencrypt-staging
+    kind: ClusterIssuer
+  commonName: hw.ms.ktogias.gr
+
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: hw-ms-ktogias-gr-gateway
+spec:
+  selector:
+    istio: ingressgateway # use Istio default gateway implementation
+  servers:
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: hw-ms-ktogias-gr-credential-staging
+      # privateKey: sds
+      # serverCertificate: sds
+    hosts:
+    - "hw.ms.ktogias.gr"
+    
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: hw-ms-ktogias-gr
+spec:
+  hosts:
+  - "hw.ms.ktogias.gr"
+  gateways:
+  - hw-ms-ktogias-gr-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        port:
+          number: 80
+        host: helloworld-ui
+      
