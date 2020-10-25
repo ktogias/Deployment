@@ -47,7 +47,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: hwapi-ms-ktogias-gr-credential-staging
-  namespace: helloworld
+  namespace: istio-system
   labels:
     use-http01-solver: "true"
   annotations:
