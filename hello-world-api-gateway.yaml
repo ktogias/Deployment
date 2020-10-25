@@ -16,10 +16,11 @@ spec:
       containers:
       - name: apigateway
         image: cloud.canister.io:5000/ktogias/helloworld:helloworldapigateway-0.1.1
+        env:
+        - name: HELLO_SERVICE_URL
+          value: hello-service.helloworld.svc.cluster.local
+        - name: WORLD_SERVICE_URL
+          value: world-service.helloworld.svc.cluster.local
       imagePullSecrets:
       - name: registry-canisterio
-      env:
-      - name: HELLO_SERVICE_URL
-        value: hello-service.helloworld.svc.cluster.local
-      - name: WORLD_SERVICE_URL
-        value: world-service.helloworld.svc.cluster.local
+      
